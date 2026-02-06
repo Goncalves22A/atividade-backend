@@ -3,8 +3,14 @@ import express from 'express'
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.json({ mensagem: 'olá,mundo!' })
+app.use(express.json())
+
+app.post('/produtos', (req, res) => {
+  const produto = req.body ?? {}
+  res.status(201).json({
+    mensagem: 'Produto cadastrado com sucesso.',
+    produto,
+  })
 })
 
 app.listen(port, () => {
